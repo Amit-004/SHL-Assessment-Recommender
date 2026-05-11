@@ -2,11 +2,23 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 
-
 from app.agent import handle_chat
 
 
-app = FastAPI()
+app = FastAPI(
+    title="SHL Assessment Recommender API",
+    version="1.0.0"
+)
+
+
+# -----------------------------
+# Root Endpoint
+# -----------------------------
+@app.get("/")
+def root():
+    return {
+        "message": "SHL Assessment Recommender API is running"
+    }
 
 
 # -----------------------------
@@ -26,7 +38,9 @@ class ChatRequest(BaseModel):
 # -----------------------------
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {
+        "status": "ok"
+    }
 
 
 # -----------------------------
